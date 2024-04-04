@@ -54,13 +54,15 @@ export class AppComponent {
 
   toggleCompleted(todo: any) {
     todo.completed = !todo.completed;
-    this.todoService.updateTodo(todo._id, { text: todo.text, completed: todo.completed }).subscribe(updatedTodo => {
-      const index = this.todos.findIndex(t => t._id === updatedTodo._id);
-      if (index !== -1) {
-        this.todos[index] = updatedTodo;
-      }
-      this.saveTodosToLocalStorage()
-    });
+    this.todoService
+      .updateTodo(todo._id, { text: todo.text, completed: todo.completed })
+      .subscribe((updatedTodo) => {
+        const index = this.todos.findIndex((t) => t._id === updatedTodo._id);
+        if (index !== -1) {
+          this.todos[index] = updatedTodo;
+        }
+        this.saveTodosToLocalStorage();
+      });
     this.loadTodos();
   }
 

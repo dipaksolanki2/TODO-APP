@@ -24,7 +24,7 @@
           <input type="text" class="form-control form-control-sm" formControlName="todoText">
         </ng-template>
         <div style="display: flex; gap: 5px;">
-          <button class="btn btn-success btn-sm mr-2" *ngIf="!todo.completed" (click)="toggleCompleted(todo)">
+          <button class="btn btn-success btn-sm mr-2" (click)="toggleCompleted(todo)">
             {{ todo.completed ? 'Undo' : 'Complete' }}
           </button>
           <button class="btn btn-primary btn-sm mr-2" *ngIf="!todo.completed && !todo.editing" (click)="editTodo(todo)">
