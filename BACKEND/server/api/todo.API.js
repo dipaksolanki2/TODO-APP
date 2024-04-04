@@ -78,7 +78,7 @@ module.exports = {
         assign: "deleteTodo",
         method: async (request, h) => {
           try {
-            console.log(request.params);
+            // console.log(request.params);
             const { id } = request.params;
             const deletedTodo = await Todo.findByIdAndDelete(id);
             return deletedTodo;
