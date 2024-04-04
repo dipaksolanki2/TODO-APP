@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="container mt-5">
+    <h1 class="mb-4">Todo List</h1>
+  
+    <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" formControlName="todoText" placeholder="Enter your todo">
+        <button class="btn btn-primary" type="submit">{{ editingTodo ? 'Update' : 'Add' }}</button>
+      </div>
+    </form>
+  
+    <div class="btn-group mb-3">
+      <button class="btn btn-outline-secondary" (click)="filterTodos('all')" [class.active]="filterOption === 'all'">All</button>
+      <button class="btn btn-outline-secondary" (click)="filterTodos('completed')" [class.active]="filterOption === 'completed'">Completed</button>
+      <button class="btn btn-outline-secondary" (click)="filterTodos('active')" [class.active]="filterOption === 'active'">Active</button>
+    </div>
+  
+    <ul class="list-group">
+      <li *ngFor="let todo of getFilteredTodos()" class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="form-group mb-0" *ngIf="!todo.editing; else editMode">
+          <span [ngClass]="{ 'text-decoration-line-through': todo.completed }">{{ todo.text }}</span>
+        </div>
+        <ng-template #editMode>
+          <input type="text" class="form-control form-control-sm" formControlName="todoText">
+        </ng-template>
+        <div style="display: flex; gap: 5px;">
+          <button class="btn btn-success btn-sm mr-2" *ngIf="!todo.completed" (click)="toggleCompleted(todo)">
+            {{ todo.completed ? 'Undo' : 'Complete' }}
+          </button>
+          <button class="btn btn-primary btn-sm mr-2" *ngIf="!todo.completed && !todo.editing" (click)="editTodo(todo)">
+            {{ todo.editing ? 'Update' : 'Edit' }}
+          </button>
+          <button class="btn btn-danger btn-sm" *ngIf="!todo.editing" (click)="deleteTodo(todo._id)">Delete</button>
+        </div>
+      </li>
+      <p *ngIf="getFilteredTodos().length === 0">No todos in {{ filterOption | titlecase }} tab.</p>
+    </ul>
+    
+    <div>Total Todos: {{ todos.length }}</div>
+    <div>Completed: {{ getCompletedCount() }}</div>
+  </div>
+</div>

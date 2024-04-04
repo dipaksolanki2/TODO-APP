@@ -1,0 +1,25 @@
+.btn {
+    height: calc(1.5em + 0.75rem + 2px);
+  }
+  .input-group input {
+    height: calc(1.5em + 0.75rem + 2px);
+  }
+  
+  /* Keep input field and buttons aligned vertically */
+  .list-group-item .form-group,
+  .list-group-item .form-group input {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+  }
+  
+  /* Ensure consistent height for input field in edit mode */
+  .list-group-item .form-group input {
+    height: auto;
+  }
+  
+  /* Ensure buttons are always displayed inline */
+  .list-group-item .form-group button {
+    display: inline-block;
+    vertical-align: middle;
+  }
